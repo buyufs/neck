@@ -1,3 +1,5 @@
+delete require.cache[require.resolve('axios')];
+
 // 导入必要的模块和库
 const express = require('express');
 const axios = require('axios');
