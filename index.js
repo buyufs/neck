@@ -18,7 +18,7 @@ app.post('/subscription', async (req, res) => {
   // 发送服务提醒消息
   try {
     const accessToken = await getAccessToken(); // 获取访问令牌
-    const templateId = 'your_template_id'; // 替换为您的模板 ID
+    const templateId = 'WsdmQ7-3J-zqj6IxG030OgF9cVinrk6xDssGgSuQuns'; // 替换为您的模板 ID
     const message = {
       touser: userId,
       template_id: templateId,
@@ -49,11 +49,20 @@ function delay(ms) {
 }
 
 // 辅助函数：获取访问令牌
+
+// 辅助函数：获取访问令牌
 async function getAccessToken() {
-  // 实现获取访问令牌的逻辑，例如通过微信提供的接口获取
-  // 这里只是示例，您需要根据实际情况进行实现
-  const accessToken = 'your_access_token'; // 替换为实际的访问令牌
-  return accessToken;
+  const appId = 'wx1e1f16b64387ae7d'; // 替换为您的小程序的 AppID
+  const appSecret = 'f39e51eda08d414b43d22974d4a23e1b'; // 替换为您的小程序的 AppSecret
+
+  try {
+    const response = await axios.get(`https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=${appId}&secret=${appSecret}`);
+    const accessToken = response.data.access_token;
+    return accessToken;
+  } catch (error) {
+    console.error('获取访问令牌失败:', error.message);
+    throw error;
+  }
 }
 
 // 启动 Express 应用
