@@ -27,10 +27,10 @@ async function sendapi(openid) {
           // 这里替换成自己的模板ID的详细事项，不要擅自添加或更改
           // 按照key前面的类型，对照参数限制填写，否则都会发送不成功
           // 
-          thing1.DATA: {
+          thing1: {
             value: "这是一个提醒",
           },
-          time2.DATA: {
+          time2: {
             value: "2022年4月26日 21:48",
           },
         },
