@@ -24,8 +24,8 @@ RUN npm config set registry https://registry.npm.taobao.org/
 # npm 安装依赖
 RUN npm install 
 RUN npm install request@latest
-RUN npm install express
-RUN npm install axios
+RUN npm install express@latest
+RUN npm install axios@latest
 
 # 将当前目录（dockerfile所在目录）下所有文件都拷贝到工作目录下（.dockerignore中文件除外）
 COPY . /app
