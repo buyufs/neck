@@ -23,6 +23,7 @@ RUN npm config set registry https://registry.npm.taobao.org/
 
 # npm 安装依赖
 RUN npm install
+RUN npm install express
 RUN npm install axios
 RUN npm install body-parser
 
