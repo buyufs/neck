@@ -24,9 +24,6 @@ async function sendapi(openid) {
         template_id: "WsdmQ7-3J-zqj6IxG030OgF9cVinrk6xDssGgSuQuns",
         miniprogram_state: "developer",
         data: {
-          // 这里替换成自己的模板ID的详细事项，不要擅自添加或更改
-          // 按照key前面的类型，对照参数限制填写，否则都会发送不成功
-          // 
           thing1: {
             value: "提醒",
           },
