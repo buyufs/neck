@@ -1,42 +1,43 @@
-const express = require('express')
-const bodyParser = require('body-parser')
-const axios = require('axios')
+onst express = require("express");
+const request = require("request");
+const app = express();
+app.use(express.json())
 
-const PORT = process.env.PORT || 80
-const HOST = '0.0.0.0'
-
-// App
-const app = express()
-
-app.use(bodyParser.raw())
-app.use(bodyParser.json({}))
-app.use(bodyParser.urlencoded({ extended: true }))
-
-const client = axios.default
-
-app.all('/', async (req, res) => {
-    const headers = req.headers
-    const weixinAPI = `http://api.weixin.qq.com/cgi-bin/message/custom/send`
-    const payload = {
-        touser: headers['x-wx-openid'],
-        msgtype: 'text',
-        text: {
-            content: `云托管接收消息推送成功，内容如下：\n${JSON.stringify(req.body, null, 2)}`
-        }
-    }
-    const addDelayedFunctionTask = async (data) => {
-  const resp = await Axios.post("https://api.weixin.qq.com/tcb/adddelayedfunctiontask", data)
-  return resp.data
-}
-    // dispatch to wx server
-    const result = await client.post(weixinAPI, payload)
-    console.log('received request', req.body, result.data)
-    res.send('success')
+app.get("/send", async function (req, res) {
+    const { openid } = req.query // 通过get参数形式指定openid
+    // 在这里直接是触发性发送，也可以自己跟业务做绑定，改成事件性发送
+    const info = await sendapi(openid)
+    res.send(info)
 });
-const addDelayedFunctionTask = async (data) => {
-  const resp = await Axios.post("https://api.weixin.qq.com/tcb/adddelayedfunctiontask", data)
-  return resp.data
-}
 
-app.listen(PORT, HOST)
-console.log(`Running on http://${HOST}:${PORT}`)
+app.listen(80,function(){
+  console.log('服务启动成功！')
+})
+
+async function sendapi(openid) {
+  return new Promise((resolve, reject) => {
+    request({
+      url: "http://api.weixin.qq.com/cgi-bin/message/subscribe/send",
+      method: "POST",
+      body: JSON.stringify({
+        touser: openid,
+        template_id: "WsdmQ7-3J-zqj6IxG030OgF9cVinrk6xDssGgSuQuns",
+        miniprogram_state: "developer",
+        data: {
+          // 这里替换成自己的模板ID的详细事项，不要擅自添加或更改
+          // 按照key前面的类型，对照参数限制填写，否则都会发送不成功
+          // 
+          thing1.DATA: {
+            value: "这是一个提醒",
+          },
+          time2.DATA: {
+            value: "2022年4月26日 21:48",
+          },
+        },
+      }),
+    },function(error,res){
+        if(error) reject(error)
+        resolve(res.body)
+    });
+  });
+}
