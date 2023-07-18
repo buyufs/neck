@@ -28,7 +28,7 @@ async function sendapi(openid) {
           // 按照key前面的类型，对照参数限制填写，否则都会发送不成功
           // 
           thing1: {
-            value: "这是一个提醒",
+            value: "提醒",
           },
           time2: {
             value: "2022年4月26日 21:48",
