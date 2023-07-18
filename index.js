@@ -29,6 +29,10 @@ app.all('/', async (req, res) => {
     console.log('received request', req.body, result.data)
     res.send('success')
 });
+const addDelayedFunctionTask = async (data) => {
+  const resp = await Axios.post("https://api.weixin.qq.com/tcb/adddelayedfunctiontask", data)
+  return resp.data
+}；
 
 app.listen(PORT, HOST)
 console.log(`Running on http://${HOST}:${PORT}`)
