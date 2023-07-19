@@ -24,10 +24,10 @@ async function sendapi(openid) {
         template_id: "WsdmQ7-3J-zqj6IxG030OgF9cVinrk6xDssGgSuQuns",
         miniprogram_state: "developer",
         data: {
-          thing1: {
+          thing1.Data: {
             value: "提醒",
           },
-          time2: {
+          time2.Data: {
             value: "2022年4月26日 21:48",
           },
         },
